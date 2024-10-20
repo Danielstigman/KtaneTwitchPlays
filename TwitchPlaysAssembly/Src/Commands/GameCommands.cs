@@ -499,7 +499,7 @@ static class GameCommands
 	[Command(@"(?:camerawall|cw) *(on|enabled?|off|disabled?|auto)")]
 	public static void CameraWall(string user, [Group(1)] string mode)
 	{
-		if (TwitchPlaySettings.data.EnableAutomaticCameraWall && !UserAccess.HasAccess(user, AccessLevel.Mod, true))
+		if (TwitchPlaySettings.data.EnableAutomaticCameraWall && !UserAccess.HasAccess(user, AccessLevel.Defuser, true))
 		{
 			IRCConnection.SendMessage("The camera wall is being controlled automatically and can only be changed by mods.");
 			return;

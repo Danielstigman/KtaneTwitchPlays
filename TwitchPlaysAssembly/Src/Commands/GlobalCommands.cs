@@ -1551,7 +1551,7 @@ static class GlobalCommands
 	/// <syntax>skipcommand</syntax>
 	/// <summary>Forcibly skips the currently running command. It is only recommended to use this to skip a command that is stuck. This may cause issues and should be used with caution.</summary>
 	/// <restriction>Admin</restriction>
-	[Command("skip(?:coroutine|command|cmd)?", AccessLevel.Admin, AccessLevel.Admin)]
+	[Command("skip(?:coroutine|command|cmd)?", AccessLevel.Defuser, AccessLevel.Defuser)]
 	public static void Skip()
 	{
 		TwitchPlaysService.Instance.CoroutineQueue.SkipCurrentCoroutine = true;
