@@ -66,6 +66,10 @@ public static class ComponentSolverFactory
 		ModComponentSolverCreators["gemory"] = module => new GemoryComponentSolver(module);
 		ModComponentSolverCreators["nonagonInfinity"] = module => new NonagonInfinityComponentSolver(module);
 
+		//Maffo Modules
+		ModComponentSolverCreators["poisonedGoblets"] = module => new PoisonedGobletsComponentSolver(module);
+		ModComponentSolverCreators["yetAnotherKeypad"] = module => new YetAnotherKeypadComponentSolver(module);
+
 		//Mock Army Modules
 		ModComponentSolverCreators["AnagramsModule"] = module => new AnagramsComponentSolver(module);
 		ModComponentSolverCreators["Emoji Math"] = module => new EmojiMathComponentSolver(module);
@@ -133,7 +137,6 @@ public static class ComponentSolverFactory
 		ModComponentSolverCreators["babaIsWho"] = module => new BabaIsWhoComponentSolver(module);
 		ModComponentSolverCreators["chordProgressions"] = module => new ChordProgressionsComponentSolver(module);
 		ModComponentSolverCreators["rng"] = module => new RNGComponentSolver(module);
-		ModComponentSolverCreators["needyShapeMemory"] = module => new ShapeMemoryComponentSolver(module);
 		ModComponentSolverCreators["caesarsMaths"] = module => new CaesarsMathsComponentSolver(module);
 		ModComponentSolverCreators["gatekeeper"] = module => new GatekeeperComponentSolver(module);
 		ModComponentSolverCreators["stateOfAggregation"] = module => new StateOfAggregationComponentSolver(module);
@@ -164,7 +167,7 @@ public static class ComponentSolverFactory
 		ModComponentSolverCreators["threeSentenceHorror"] = module => new ThreeSentenceHorrorComponentSolver(module);
 		ModComponentSolverCreators["GreenWires"] = module => new GreenWiresComponentSolver(module);
 		ModComponentSolverCreators["traffic_board"] = module => new TrafficBoardComponentSolver(module);
-		ModComponentSolverCreators["puzzlingButtons"] = module => new PuzzlingButtonsComponentSolver(module);
+		ModComponentSolverCreators["NeedyPou"] = module => new PouComponentSolver(module);
 
 		//ZekNikZ Modules
 		ModComponentSolverCreators["EdgeworkModule"] = module => new EdgeworkComponentSolver(module);
@@ -192,6 +195,10 @@ public static class ComponentSolverFactory
 		ModComponentSolverCreators["ManualCodes"] = module => new ManualCodesComponentSolver(module);
 		ModComponentSolverCreators["jackboxServerModule"] = module => new JackboxTVComponentSolver(module);
 		ModComponentSolverCreators["NeedyScreensaver"] = module => new ScreensaverComponentSolver(module);
+
+		//UltraCboy Modules
+		ModComponentSolverCreators["needyShapeMemory"] = module => new ShapeMemoryComponentSolver(module);
+		ModComponentSolverCreators["needyTypingTutor"] = module => new TypingTutorComponentSolver(module);
 
 		//Translated Modules
 		ModComponentSolverCreators["BigButtonTranslated"] = module => new TranslatedButtonComponentSolver(module);
@@ -386,6 +393,10 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["gemory"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Gemory", announceModule = true };
 		ModComponentSolverInformation["nonagonInfinity"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Nonagon Infinity" };
 
+		//Maffo
+		ModComponentSolverInformation["poisonedGoblets"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Poisoned Goblets" };
+		ModComponentSolverInformation["yetAnotherKeypad"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Yet Another Keypad" };
+
 		//Mock Army
 		ModComponentSolverInformation["AnagramsModule"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Anagrams" };
 		ModComponentSolverInformation["Emoji Math"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Emoji Math" };
@@ -450,7 +461,6 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["babaIsWho"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Baba Is Who?" };
 		ModComponentSolverInformation["chordProgressions"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Chord Progressions" };
 		ModComponentSolverInformation["rng"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Random Number Generator", additionalNeedyTime = 30 };
-		ModComponentSolverInformation["needyShapeMemory"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Needy Shape Memory" };
 		ModComponentSolverInformation["caesarsMaths"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Caesar's Maths" };
 		ModComponentSolverInformation["gatekeeper"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Gatekeeper" };
 		ModComponentSolverInformation["stateOfAggregation"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "State of Aggregation" };
@@ -481,7 +491,7 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["threeSentenceHorror"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Three Sentence Horror", announceModule = true, unclaimable = true };
 		ModComponentSolverInformation["GreenWires"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Green Wires" };
 		ModComponentSolverInformation["traffic_board"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Traffic Board" };
-		ModComponentSolverInformation["puzzlingButtons"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Puzzling Buttons" };
+		ModComponentSolverInformation["NeedyPou"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Pou" };
 
 		//GoodHood
 		ModComponentSolverInformation["buttonOrder"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Button Order" };
@@ -529,6 +539,10 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["jackboxServerModule"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Jackbox.TV", unclaimable = true };
 		ModComponentSolverInformation["NeedyScreensaver"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Screensaver" };
 
+		//UltraCboy
+		ModComponentSolverInformation["needyShapeMemory"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Needy Shape Memory" };
+		ModComponentSolverInformation["needyTypingTutor"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Typing Tutor" };
+
 		//Translated Modules
 		ModComponentSolverInformation["BigButtonTranslated"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Big Button Translated" };
 		ModComponentSolverInformation["MorseCodeTranslated"] = new ModuleInformation { builtIntoTwitchPlays = true, moduleDisplayName = "Morse Code Translated" };
@@ -552,6 +566,9 @@ public static class ComponentSolverFactory
 		//AAces
 		ModComponentSolverInformation["timeKeeper"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
 
+		//AnAverageArceus
+		ModComponentSolverInformation["dontTouchAnything"] = new ModuleInformation { unclaimable = true };
+
 		//AT_Bash / Bashly / Ashthebash
 		ModComponentSolverInformation["ColourFlash"] = new ModuleInformation { helpText = "Submit the correct response with !{0} press yes 3, or !{0} press no 5." };
 		ModComponentSolverInformation["CruelPianoKeys"] = new ModuleInformation { helpText = "Submit your answer with !{0} press Bb Bb Bb Bb Gb Ab Bb Ab Bb.", CompatibilityMode = true };
@@ -571,6 +588,9 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["monsplodeFight"] = new ModuleInformation { helpText = "Use a move with !{0} use splash." };
 		ModComponentSolverInformation["monsplodeWho"] = new ModuleInformation { helpText = "Press either button with “!{ 0 } press left / right | Left and Right can be abbreviated to(L) & (R)" };
 
+		//Deaf
+		ModComponentSolverInformation["WAR"] = new ModuleInformation { unclaimable = true };
+
 		//EpicToast
 		ModComponentSolverInformation["brushStrokes"] = new ModuleInformation { CompatibilityMode = true };
 		ModComponentSolverInformation["cookieJars"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
@@ -582,11 +602,15 @@ public static class ComponentSolverFactory
 		//eXish
 		ModComponentSolverInformation["organizationModule"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
 		ModComponentSolverInformation["blinkstopModule"] = new ModuleInformation { statusLightPosition = StatusLightPosition.TopLeft };
+		ModComponentSolverInformation["widgetry"] = new ModuleInformation { announceModule = true };
 
 		//Flamanis
 		ModComponentSolverInformation["ChessModule"] = new ModuleInformation { helpText = "Cycle the positions with !{0} cycle. Submit the safe spot with !{0} press C2.", CompatibilityMode = true };
 		ModComponentSolverInformation["Laundry"] = new ModuleInformation { helpText = "Set all of the options with !{0} set all 30C,2 dot,110C,Wet Cleaning. Set just washing with !{0} set wash 40C. Submit with !{0} insert coin. ...pray for that 4 in 2 & lit BOB Kappa" };
 		ModComponentSolverInformation["ModuleAgainstHumanity"] = new ModuleInformation { helpText = "Reset the module with !{0} press reset. Move the black card +2 with !{0} move black 2. Move the white card -3 with !{0} move white -3. Submit with !{0} press submit." };
+
+		//GhostSalt
+		ModComponentSolverInformation["GSAccessCodes"] = new ModuleInformation { announceModule = true };
 
 		//Goofy
 		ModComponentSolverInformation["megaMan2"] = new ModuleInformation { CompatibilityMode = true };
@@ -607,14 +631,24 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["footnotes"] = new ModuleInformation { CompatibilityMode = true };
 		ModComponentSolverInformation["forgetThis"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
 
+		//JyGein
+		ModComponentSolverInformation["wireTesting"] = new ModuleInformation { statusLightPosition = StatusLightPosition.BottomRight };
+
+		//Katarina
+		ModComponentSolverInformation["kataZenerCards"] = new ModuleInformation { announceModule = true };
+
 		//KingBranBran
 		ModComponentSolverInformation["intervals"] = new ModuleInformation { CompatibilityMode = true };
+
 		//Kritzy
 		ModComponentSolverInformation["KritMicroModules"] = new ModuleInformation { CompatibilityMode = true };
 		ModComponentSolverInformation["KritRadio"] = new ModuleInformation { CompatibilityMode = true };
 
 		//Maca
 		ModComponentSolverInformation["Playfair"] = new ModuleInformation { moduleDisplayName = "Playfair Cipher" };
+
+		//MaddyMoos
+		ModComponentSolverInformation["top10nums"] = new ModuleInformation { statusLightPosition = StatusLightPosition.BottomRight };
 
 		//McNiko67
 		ModComponentSolverInformation["BigSwitch"] = new ModuleInformation { CompatibilityMode = true };
@@ -627,6 +661,9 @@ public static class ComponentSolverFactory
 
 		//NoahCoolBoy
 		ModComponentSolverInformation["pigpenRotations"] = new ModuleInformation { helpTextOverride = true, helpText = "To submit abcdefhijklm use '!{0} abcdefhijklm'." };
+
+		//Obvious
+		ModComponentSolverInformation["hearthur"] = new ModuleInformation { unclaimable = true };
 
 		//Piggered
 		ModComponentSolverInformation["NonogramModule"] = new ModuleInformation { CompatibilityMode = true };
@@ -662,10 +699,12 @@ public static class ComponentSolverFactory
 		ModComponentSolverInformation["forgetMeLater"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
 		ModComponentSolverInformation["tallorderedKeys"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
 		ModComponentSolverInformation["veryAnnoyingButton"] = new ModuleInformation { announceModule = true };
+		ModComponentSolverInformation["doomsdayButton"] = new ModuleInformation { statusLightPosition = StatusLightPosition.BottomLeft };
 
 		//TheThirdMan
 		ModComponentSolverInformation["forgetThemAll"] = new ModuleInformation { CameraPinningAlwaysAllowed = true, announceModule = true };
 		ModComponentSolverInformation["treasureHunt"] = new ModuleInformation { CompatibilityMode = true };
+		ModComponentSolverInformation["oldFogey"] = new ModuleInformation { statusLightPosition = StatusLightPosition.BottomLeft };
 
 		//Timwi (includes Perky/Konqi/Eluminate/Mitterdoo/Riverbui modules maintained by Timwi)
 		ModComponentSolverInformation["alphabet"] = new ModuleInformation { moduleDisplayName = "Alphabet" };
