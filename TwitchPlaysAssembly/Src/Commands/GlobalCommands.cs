@@ -1611,7 +1611,7 @@ static class GlobalCommands
 	}
 
     [Command(@"demil load (.+)", AccessLevel.Admin, AccessLevel.Admin)]
-    public IEnumerator LoadDemilMission([Group(1)] string missionOrUrl, string user, bool isWhisper)
+    public static IEnumerator LoadDemilMission([Group(1)] string missionOrUrl, string user, bool isWhisper)
     {
         string missionId = null;
         if (missionOrUrl.StartsWith("http"))
@@ -1627,14 +1627,14 @@ static class GlobalCommands
         if (!int.TryParse(missionId, out int missionIdInt))
         {
             IRCConnection.SendMessage("Invalid mission ID or URL", user, !isWhisper);
-            return;
+            yield break;
         }
         UnityWebRequest www = UnityWebRequest.Get("http://localhost:8095/loadMission?steamID=" + missionIdInt.ToString());
         yield return www.SendWebRequest();
-        if (www.result != UnityWebRequest.Result.Success)
+        if (!string.IsNullOrWhiteSpace(www.error))
         {
             IRCConnection.SendMessage("Failed to fetch mission", user, !isWhisper);
-            return;
+            yield break;
         }
         IRCConnection.SendMessage("Mission fetched", user, !isWhisper);
     }
