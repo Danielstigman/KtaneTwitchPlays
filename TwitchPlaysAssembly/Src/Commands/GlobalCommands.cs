@@ -1,5 +1,4 @@
 using System;
-using System.Web;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +7,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Networking;
 
 using Random = UnityEngine.Random;
 
@@ -1609,35 +1607,6 @@ static class GlobalCommands
 		GameRoom.ResetCamera();
 		CameraChanged(user, isWhisper);
 	}
-
-    [Command(@"demil load (.+)", AccessLevel.Admin, AccessLevel.Admin)]
-    public IEnumerator LoadDemilMission([Group(1)] string missionOrUrl, string user, bool isWhisper)
-    {
-        string missionId = null;
-        if (missionOrUrl.StartsWith("http"))
-        {
-            // https://steamcommunity.com/sharedfiles/filedetails/?id=1622093906&searchtext=
-            var url = new Uri(missionOrUrl);
-            missionId = HttpUtility.ParseQueryString(url.Query).Get("id");
-        }
-        else
-        {
-            missionId = missionOrUrl.Trim();
-        }
-        if (!int.TryParse(missionId, out int missionIdInt))
-        {
-            IRCConnection.SendMessage("Invalid mission ID or URL", user, !isWhisper);
-            return;
-        }
-        UnityWebRequest www = UnityWebRequest.Get("http://localhost:8095/loadMission?steamID=" + missionIdInt.ToString());
-        yield return www.SendWebRequest();
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            IRCConnection.SendMessage("Failed to fetch mission", user, !isWhisper);
-            return;
-        }
-        IRCConnection.SendMessage("Mission fetched", user, !isWhisper);
-    }
 
 	[Command(null)]
 	public static bool DefaultCommand(string cmd, string user, bool isWhisper)
