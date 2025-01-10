@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 using Random = UnityEngine.Random;
 
@@ -1606,6 +1607,39 @@ static class GlobalCommands
 	{
 		GameRoom.ResetCamera();
 		CameraChanged(user, isWhisper);
+	}
+
+	[Command(@"demil load (.+)", AccessLevel.Admin, AccessLevel.Admin)]
+	public static IEnumerator LoadDemilMission([Group(1)] string missionOrUrl, string user, bool isWhisper)
+	{
+		string missionId = missionOrUrl.Trim();
+		DebugHelper.Log($"Mission ID = {missionId}");
+		if (!long.TryParse(missionId, out long missionIdInt))
+		{
+			IRCConnection.SendMessage("Invalid mission ID or URL", user, !isWhisper);
+			yield break;
+		}
+		UnityWebRequest www = UnityWebRequest.Get("http://localhost:8095/loadMission?steamID=" + missionIdInt.ToString());
+		yield return www.SendWebRequest();
+		if (www.error != null && www.error != "")
+		{
+			IRCConnection.SendMessage($"Failed to fetch mission {missionIdInt.ToString()}", user, !isWhisper);
+			yield break;
+		}
+		IRCConnection.SendMessage($"Mission {missionIdInt.ToString()} fetched", user, !isWhisper);
+	}
+
+	[Command(@"demil reload", AccessLevel.SuperUser, AccessLevel.SuperUser)]
+	public static IEnumerator ReloadDemilMission(string user, bool isWhisper)
+	{
+		UnityWebRequest www = UnityWebRequest.Get("http://localhost:8095/saveAndDisable");
+		yield return www.SendWebRequest();
+		if (www.error != null && www.error != "")
+		{
+			IRCConnection.SendMessage($"Failed to reload", user, !isWhisper);
+			yield break;
+		}
+		IRCConnection.SendMessage($"Reloaded", user, !isWhisper);
 	}
 
 	[Command(null)]
