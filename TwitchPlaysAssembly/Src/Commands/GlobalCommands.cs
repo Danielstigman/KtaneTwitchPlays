@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 using Random = UnityEngine.Random;
 
@@ -1608,7 +1610,6 @@ static class GlobalCommands
 		CameraChanged(user, isWhisper);
 	}
 
-<<<<<<< HEAD
     [Command(@"demil load (.+)", AccessLevel.Admin, AccessLevel.Admin)]
     public static IEnumerator LoadDemilMission([Group(1)] string missionOrUrl, string user, bool isWhisper)
     {
@@ -1638,8 +1639,6 @@ static class GlobalCommands
         IRCConnection.SendMessage("Mission fetched", user, !isWhisper);
     }
 
-=======
->>>>>>> 7c622a76714d008c4c43508a3d7bb4e94bceca4b
 	[Command(null)]
 	public static bool DefaultCommand(string cmd, string user, bool isWhisper)
 	{
