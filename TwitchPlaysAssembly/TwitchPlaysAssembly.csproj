@@ -35,6 +35,7 @@
       <HintPath>..\Assets\Plugins\Managed\KMFramework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="UnityEngine">
       <HintPath>$(GameFolder)\ktane_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
