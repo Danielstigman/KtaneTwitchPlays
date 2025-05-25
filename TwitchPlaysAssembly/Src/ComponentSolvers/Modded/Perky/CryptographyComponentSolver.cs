@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("CryptModule")]
 public class CryptographyComponentSolver : ComponentSolver
 {
 	public CryptographyComponentSolver(TwitchModule module) :
@@ -11,7 +12,7 @@ public class CryptographyComponentSolver : ComponentSolver
 	{
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("Keys");
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Solve the cryptography puzzle with !{0} press N B V T K.");
+		SetHelpMessage("Solve the cryptography puzzle with !{0} press N B V T K.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

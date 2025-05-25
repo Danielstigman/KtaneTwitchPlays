@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+[ModuleID("OrientationCube")]
 public class OrientationCubeComponentSolver : ComponentSolver
 {
 	public OrientationCubeComponentSolver(TwitchModule module) :
@@ -16,7 +17,7 @@ public class OrientationCubeComponentSolver : ComponentSolver
 		_right = (MonoBehaviour) RightField.GetValue(component);
 		_ccw = (MonoBehaviour) CcwField.GetValue(component);
 		_cw = (MonoBehaviour) CwField.GetValue(component);
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Move the cube with !{0} press cw l set. The buttons are l, r, cw, ccw, set.");
+		SetHelpMessage("Move the cube with !{0} press cw l set. The buttons are l, r, cw, ccw, set.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

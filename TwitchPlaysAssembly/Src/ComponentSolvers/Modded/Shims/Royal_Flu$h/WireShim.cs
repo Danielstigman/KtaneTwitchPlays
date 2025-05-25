@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("wire")]
 public class WireShim : ComponentSolverShim
 {
 	public WireShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_switches = new KMSelectable[] { _component.GetValue<KMSelectable>("switch1"), _component.GetValue<KMSelectable>("switch2"), _component.GetValue<KMSelectable>("switch3") };
 		_startButton = _component.GetValue<KMSelectable>("startButton");

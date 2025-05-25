@@ -3,12 +3,12 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("ShapesBombs")]
 public class ShapesAndBombsShim : ComponentSolverShim
 {
 	public ShapesAndBombsShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("ModuleButtons");
 		_display = _component.GetValue<KMSelectable>("NumScreen");
@@ -29,9 +29,7 @@ public class ShapesAndBombsShim : ComponentSolverShim
 		}
 		else
 		{
-			IEnumerator command = RespondToCommandUnshimmed(inputCommand);
-			while (command.MoveNext())
-				yield return command.Current;
+			yield return RespondToCommandUnshimmed(inputCommand);
 		}
 	}
 

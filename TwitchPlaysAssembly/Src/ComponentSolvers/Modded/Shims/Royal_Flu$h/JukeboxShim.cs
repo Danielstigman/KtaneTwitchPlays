@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ModuleID("jukebox")]
 public class JukeboxShim : ComponentSolverShim
 {
 	public JukeboxShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
 		_component = module.BombComponent.GetComponent(ComponentType);
 	}

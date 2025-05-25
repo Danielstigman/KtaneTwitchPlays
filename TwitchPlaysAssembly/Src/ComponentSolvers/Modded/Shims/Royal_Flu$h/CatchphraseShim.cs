@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+[ModuleID("catchphrase")]
 public class CatchphraseShim : ComponentSolverShim
 {
 	public CatchphraseShim(TwitchModule module) :
 		base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		component = module.BombComponent.GetComponent(ComponentType);
 		panels = component.GetValue<KMSelectable[]>("panels");
 		keypad = component.GetValue<KMSelectable[]>("keypads");
@@ -25,8 +25,7 @@ public class CatchphraseShim : ComponentSolverShim
 		}
 
 		IEnumerator command = RespondToCommandUnshimmed(inputCommand);
-		while (command.MoveNext())
-			yield return command.Current;
+		yield return command;
 	}
 
 	protected override IEnumerator ForcedSolveIEnumeratorShimmed()

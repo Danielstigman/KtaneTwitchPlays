@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("giantsDrink")]
 public class GiantsDrinkShim : ComponentSolverShim
 {
 	public GiantsDrinkShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = new KMSelectable[] { _component.GetValue<KMSelectable>("btnLeft"), _component.GetValue<KMSelectable>("btnRight") };
 	}

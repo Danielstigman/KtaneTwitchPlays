@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ModuleID("wireSpaghetti")]
 public class WireSpaghettiShim : ComponentSolverShim
 {
 	public WireSpaghettiShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_wires = _component.GetValue<KMSelectable[]>("wireSelectables");
 	}

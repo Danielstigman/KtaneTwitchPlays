@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("numberNimbleness")]
 public class NumberNimblenessComponentSolver : ComponentSolver
 {
 	public NumberNimblenessComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "!{0} screen [press the screen] | !{0} press <numbers> [press those numbers]");
+		SetHelpMessage("!{0} screen [press the screen] | !{0} press <numbers> [press those numbers]");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

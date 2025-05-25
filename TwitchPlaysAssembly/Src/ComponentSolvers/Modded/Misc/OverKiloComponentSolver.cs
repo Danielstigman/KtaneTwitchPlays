@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System;
+﻿using System;
+using System.Collections;
 using System.Linq;
 
+[ModuleID("overKilo")]
 public class OverKiloComponentSolver : ReflectionComponentSolver
 {
 	public OverKiloComponentSolver(TwitchModule module) :

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 public static class Repository
 {
 	public static string RawJSON;
-	public static List<KtaneModule> Modules;
+	public static List<KtaneModule> Modules = new List<KtaneModule>();
 
 	public static IEnumerator LoadData()
 	{
@@ -18,19 +18,26 @@ public static class Repository
 
 		RawJSON = download.Text;
 		Modules = JsonConvert.DeserializeObject<WebsiteJSON>(RawJSON).KtaneModules;
+
+		foreach (var module in Modules)
+		{
+			var info = ComponentSolverFactory.GetDefaultInformation(module.ModuleID);
+			if (info.moduleDisplayName == "") continue;
+			info.moduleDisplayName = module.Name;
+		}
 	}
 
 	public static bool IsBossMod(this string moduleID) => Modules.Any(module => module.ModuleID == moduleID && module.BossStatus != null);
 
 	public static bool ModHasQuirk(this string moduleID, string quirk)
 	{
-		var match = Modules?.Find(module => module.ModuleID == moduleID);
+		var match = Modules.Find(module => module.ModuleID == moduleID);
 		return (match?.Quirks ?? "").Contains(quirk);
 	}
 
 	public static string GetManual(string moduleID)
 	{
-		var match = Modules?.Find(module => module.ModuleID == moduleID);
+		var match = Modules.Find(module => module.ModuleID == moduleID);
 		return match?.FileName ?? match?.Name;
 	}
 

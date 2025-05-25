@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("festiveJukebox")]
 public class FestiveJukeboxComponentSolver : ComponentSolver
 {
 	public FestiveJukeboxComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Press 3 buttons using !{0} press <buttons>. (1 = top; 2 = middle; 3 = bottom.)");
+		SetHelpMessage("Press 3 buttons using !{0} press <buttons>. (1 = top; 2 = middle; 3 = bottom.)");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

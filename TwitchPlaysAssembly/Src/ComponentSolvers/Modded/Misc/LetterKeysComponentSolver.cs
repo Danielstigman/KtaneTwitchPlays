@@ -4,13 +4,14 @@ using System.Text.RegularExpressions;
 using KModkit;
 using UnityEngine;
 
+[ModuleID("LetterKeys")]
 public class LetterKeysComponentSolver : ComponentSolver
 {
 	public LetterKeysComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		_buttons = module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "!{0} press b");
+		SetHelpMessage("!{0} press b");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

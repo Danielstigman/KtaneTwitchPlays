@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+[ModuleID("ColorfulMadness")]
 public class ColorfulMadnessShim : ComponentSolverShim
 {
 	public ColorfulMadnessShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("ModuleButtons");
 	}

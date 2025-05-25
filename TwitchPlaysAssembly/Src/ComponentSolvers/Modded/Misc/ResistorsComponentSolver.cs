@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
+[ModuleID("resistors")]
 public class ResistorsComponentSolver : ComponentSolver
 {
 	public ResistorsComponentSolver(TwitchModule module) :
@@ -13,7 +14,7 @@ public class ResistorsComponentSolver : ComponentSolver
 		_pins = (KMSelectable[]) PinsField.GetValue(component);
 		_checkButton = (KMSelectable) CheckButtonField.GetValue(component);
 		_clearButton = (KMSelectable) ClearButtonField.GetValue(component);
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Connect sets of two pins with !{0} connect a tl tr c. Use !{0} submit to submit and !{0} clear to clear. Valid pins: A B C D TL TR BL BR. Top and Bottom refer to the top and bottom resistor.");
+		SetHelpMessage("Connect sets of two pins with !{0} connect a tl tr c. Use !{0} submit to submit and !{0} clear to clear. Valid pins: A B C D TL TR BL BR. Top and Bottom refer to the top and bottom resistor.");
 	}
 
 	private static int? PinToIndex(string pin)

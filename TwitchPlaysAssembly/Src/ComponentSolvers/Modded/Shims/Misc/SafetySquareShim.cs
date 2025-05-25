@@ -1,11 +1,11 @@
 using System.Collections;
 
+[ModuleID("safetySquare")]
 public class SafetySquareShim : ReflectionComponentSolverShim
 {
 	public SafetySquareShim(TwitchModule module)
 		: base(module, "SafetySquareScript", "safetySquare")
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_buttons = _component.GetValue<KMSelectable[]>("buttons");
 		_hazardButtons = new KMSelectable[] { _component.GetValue<KMSelectable>("whiteButton"), _component.GetValue<KMSelectable>("yellowButton"), _component.GetValue<KMSelectable>("redButton"), _component.GetValue<KMSelectable>("blueButton") };
 	}

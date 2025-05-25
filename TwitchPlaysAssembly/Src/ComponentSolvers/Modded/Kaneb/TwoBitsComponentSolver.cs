@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+[ModuleID("TwoBits")]
 public class TwoBitsComponentSolver : ComponentSolver
 {
 	private readonly Component _c;
@@ -33,7 +34,7 @@ public class TwoBitsComponentSolver : ComponentSolver
 		_submit = (MonoBehaviour) SubmitButtonField.GetValue(_c);
 		_query = (MonoBehaviour) QueryButtonField.GetValue(_c);
 		_buttons = (MonoBehaviour[]) ButtonsField.GetValue(_c);
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Query the answer with !{0} press K T query. Submit the answer with !{0} press G Z submit.");
+		SetHelpMessage("Query the answer with !{0} press K T query. Submit the answer with !{0} press G Z submit.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("mortalKombat")]
 public class MortalKombatShim : ComponentSolverShim
 {
 	public MortalKombatShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_btns = new KMSelectable[] { _component.GetValue<KMSelectable>("up"), _component.GetValue<KMSelectable>("down"), _component.GetValue<KMSelectable>("left"), _component.GetValue<KMSelectable>("right"), _component.GetValue<KMSelectable>("aButton"), _component.GetValue<KMSelectable>("bButton"), _component.GetValue<KMSelectable>("cButton") };
 	}

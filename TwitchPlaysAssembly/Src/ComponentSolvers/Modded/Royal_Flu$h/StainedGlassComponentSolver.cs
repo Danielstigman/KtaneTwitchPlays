@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("stainedGlass")]
 public class StainedGlassComponentSolver : ComponentSolver
 {
 	public StainedGlassComponentSolver(TwitchModule module) :
@@ -37,7 +38,7 @@ public class StainedGlassComponentSolver : ComponentSolver
 			{82, buttons[23]},
 			{91, buttons[24]},
 		};
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Press the x button: !{0} press x; Buttons are two digit numbers which refers to row and column in that order. For ex. 32 is row 3 column 2. Buttons can be chained using spaces as separators.");
+		SetHelpMessage("Press the x button: !{0} press x; Buttons are two digit numbers which refers to row and column in that order. For ex. 32 is row 3 column 2. Buttons can be chained using spaces as separators.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

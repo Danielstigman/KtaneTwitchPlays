@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+[ModuleID("necronomicon")]
 public class NecronomiconComponentSolver : ComponentSolver
 {
 	public NecronomiconComponentSolver(TwitchModule module) :
@@ -9,7 +10,7 @@ public class NecronomiconComponentSolver : ComponentSolver
 	{
 		_component = Module.BombComponent.GetComponent(ComponentType);
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Cycle all the pages using !{0} cycle or !{0} fastcycle. Submit a specific page using !{0} page 3.");
+		SetHelpMessage("Cycle all the pages using !{0} cycle or !{0} fastcycle. Submit a specific page using !{0} page 3.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

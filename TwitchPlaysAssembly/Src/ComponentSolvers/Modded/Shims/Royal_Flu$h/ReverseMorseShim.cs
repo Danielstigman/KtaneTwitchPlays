@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("reverseMorse")]
 public class ReverseMorseShim : ComponentSolverShim
 {
 	public ReverseMorseShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_dot = _component.GetValue<KMSelectable>("dotButton");
 		_dash = _component.GetValue<KMSelectable>("dashButton");

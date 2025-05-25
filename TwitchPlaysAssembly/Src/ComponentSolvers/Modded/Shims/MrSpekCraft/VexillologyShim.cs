@@ -3,12 +3,12 @@ using System.Collections;
 using System.Linq;
 using KModkit;
 
+[ModuleID("vexillology")]
 public class VexillologyShim : ComponentSolverShim
 {
 	public VexillologyShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_horizFlag = _component.GetValue<KMSelectable[]>("HorizontalFlag");
 		_vertFlag = _component.GetValue<KMSelectable[]>("VerticalFlag");

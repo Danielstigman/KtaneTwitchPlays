@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("LEGOModule")]
 public class LEGOComponentSolver : ComponentSolver
 {
 	public LEGOComponentSolver(TwitchModule module) :
@@ -12,7 +13,7 @@ public class LEGOComponentSolver : ComponentSolver
 	{
 		_component = module.BombComponent.GetComponent(ComponentType);
 		GridButtons = _component.GetValue<KMSelectable[]>("GridButtons");
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Commands: select <column><row>, color <index>, left (times), right (times), clear and submit. The first two commands can be shortened to their first letter. Color indexes are specified in english reading order. You can also select the grid relative to your last position using a string of udlr characters. Commands are chainable using semicolons.");
+		SetHelpMessage("Commands: select <column><row>, color <index>, left (times), right (times), clear and submit. The first two commands can be shortened to their first letter. Color indexes are specified in english reading order. You can also select the grid relative to your last position using a string of udlr characters. Commands are chainable using semicolons.");
 		ChainableCommands = true;
 	}
 

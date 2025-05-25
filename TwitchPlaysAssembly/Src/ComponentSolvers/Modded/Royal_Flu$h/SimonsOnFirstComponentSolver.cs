@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("simonsOnFirst")]
 public class SimonsOnFirstComponentSolver : ComponentSolver
 {
 	public SimonsOnFirstComponentSolver(TwitchModule module) :
@@ -18,7 +19,7 @@ public class SimonsOnFirstComponentSolver : ComponentSolver
 		{
 			AssignNumbers();
 		}
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Use '!{0} press <buttons>' to press the buttons. Valid button formats are: Directional: T, TR, R, BR, B, BL, L, TL; Colours (Use lime for light green and green for dark green.)");
+		SetHelpMessage("Use '!{0} press <buttons>' to press the buttons. Valid button formats are: Directional: T, TR, R, BR, B, BL, L, TL; Colours (Use lime for light green and green for dark green.)");
 	}
 
 	private void GetValues()

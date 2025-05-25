@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("horribleMemory")]
 public class HorribleMemoryShim : ComponentSolverShim
 {
 	public HorribleMemoryShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<object[]>("buttons");
 	}

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
+[ModuleID("widgetModule")]
 public class MysteryWidgetShim : ComponentSolverShim
 {
 	public static readonly List<GameObject> Covers = new List<GameObject>();
@@ -10,8 +11,6 @@ public class MysteryWidgetShim : ComponentSolverShim
 	public MysteryWidgetShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
-
 		module.StartCoroutine(WaitForMysteryWidget());
 	}
 

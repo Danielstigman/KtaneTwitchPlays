@@ -3,12 +3,12 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("timezone")]
 public class TimezoneShim : ComponentSolverShim
 {
 	public TimezoneShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("buttons");
 		_submit = _component.GetValue<KMSelectable>("InputButton");

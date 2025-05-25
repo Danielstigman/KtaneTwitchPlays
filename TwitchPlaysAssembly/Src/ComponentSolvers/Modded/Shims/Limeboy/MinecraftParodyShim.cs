@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("minecraftParody")]
 public class MinecraftParodyShim : ComponentSolverShim
 {
 	public MinecraftParodyShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("Button");
 		_submit = _component.GetValue<KMSelectable>("submit");

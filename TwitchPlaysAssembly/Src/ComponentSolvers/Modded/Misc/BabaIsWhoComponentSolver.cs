@@ -3,13 +3,14 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("babaIsWho")]
 public class BabaIsWhoComponentSolver : ComponentSolver
 {
 	public BabaIsWhoComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Press a character using using !{0} press <character>. Characters: baba, keke, me, rock, flag and wall.");
+		SetHelpMessage("Press a character using using !{0} press <character>. Characters: baba, keke, me, rock, flag and wall.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

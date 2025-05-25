@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("MazeV2")]
+[ModuleID("danielDice")]
 public class AntiTrollShim : ComponentSolverShim
 {
-	public AntiTrollShim(TwitchModule module, Dictionary<string, string> trollCommands)
+	public AntiTrollShim(TwitchModule module)
 		: base(module)
 	{
-		_trollCommands = trollCommands ?? new Dictionary<string, string>();
+		trollModules.TryGetValue(module.BombComponent.GetModuleID(), out _trollCommands);
 	}
 
 	public AntiTrollShim(TwitchModule module, IEnumerable<string> commands, string response)
@@ -25,13 +27,15 @@ public class AntiTrollShim : ComponentSolverShim
 		}
 		else
 		{
-			IEnumerator respondToCommandInternal = RespondToCommandUnshimmed(inputCommand);
-			while (respondToCommandInternal.MoveNext())
-			{
-				yield return respondToCommandInternal.Current;
-			}
+			yield return RespondToCommandUnshimmed(inputCommand);
 		}
 	}
 
 	private readonly Dictionary<string, string> _trollCommands;
+
+	private readonly Dictionary<string, Dictionary<string, string>> trollModules = new Dictionary<string, Dictionary<string, string>>()
+	{
+		{ "MazeV2", new Dictionary<string, string> { { "spinme", "Sorry, I am not going to waste time spinning every single pipe 360 degrees." } } },
+		{ "danielDice", new Dictionary<string, string> { { "rdrts", "Sorry, the secret gambler's room is off limits to you" } } }
+	};
 }

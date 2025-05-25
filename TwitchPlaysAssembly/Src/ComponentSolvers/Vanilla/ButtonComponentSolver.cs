@@ -10,13 +10,10 @@ public class ButtonComponentSolver : ComponentSolver
 	public ButtonComponentSolver(TwitchModule module) :
 		base(module)
 	{
-		ModuleInformation buttonInfo = ComponentSolverFactory.GetModuleInfo("BigButton", "!{0} tap [tap the button] | !{0} hold [hold the button] | !{0} release 7 [release when the digit shows 7]");
-		ModuleInformation buttonInfoModified = ComponentSolverFactory.GetModuleInfo("BigButtonModified", "Click the button with !{0} tap. Click the button at a time with !{0} tap 8:55 8:44 8:33. Hold the button with !{0} hold. Release the button with !{0} release 9:58 9:49 9:30.");
-
 		var buttonModule = (ButtonComponent) module.BombComponent;
 		buttonModule.GetComponent<Selectable>().OnCancel += buttonModule.OnButtonCancel;
 		_button = buttonModule.button;
-		ModInfo = VanillaRuleModifier.IsSeedVanilla() ? buttonInfo : buttonInfoModified;
+		SetHelpMessage(VanillaRuleModifier.IsSeedVanilla() ? "!{0} tap [tap the button] | !{0} hold [hold the button] | !{0} release 7 [release when the digit shows 7]" : "Click the button with !{0} tap. Click the button at a time with !{0} tap 8:55 8:44 8:33. Hold the button with !{0} hold. Release the button with !{0} release 9:58 9:49 9:30.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)
@@ -35,9 +32,7 @@ public class ButtonComponentSolver : ComponentSolver
 				yield break;
 			yield return "tap2";
 
-			IEnumerator releaseCoroutine = ReleaseCoroutineModded(inputCommand.Substring(inputCommand.IndexOf(' ')));
-			while (releaseCoroutine.MoveNext())
-				yield return releaseCoroutine.Current;
+			yield return ReleaseCoroutineModded(inputCommand.Substring(inputCommand.IndexOf(' ')));
 		}
 		else if (!_held && inputCommand.Equals("hold"))
 		{
@@ -65,8 +60,7 @@ public class ButtonComponentSolver : ComponentSolver
 			else
 				releaseCoroutine = ReleaseCoroutineModded(inputCommand.Substring(inputCommand.IndexOf(' ')));
 
-			while (releaseCoroutine.MoveNext())
-				yield return releaseCoroutine.Current;
+			yield return releaseCoroutine;
 		}
 	}
 

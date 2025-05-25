@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ModuleID("combinationLock")]
 public class CombinationLockShim : ComponentSolverShim
 {
 	public CombinationLockShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_reset = _component.GetValue<KMSelectable>("ResetButton");
 		_left = _component.GetValue<KMSelectable>("LeftButton");

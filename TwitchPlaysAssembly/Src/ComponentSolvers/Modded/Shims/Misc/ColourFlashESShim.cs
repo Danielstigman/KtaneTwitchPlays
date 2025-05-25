@@ -3,12 +3,12 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("ColourFlashES")]
 public class ColourFlashESShim : ComponentSolverShim
 {
 	public ColourFlashESShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_yes = _component.GetValue<object>("ButtonYes").GetValue<KMSelectable>("KMSelectable");
 		_no = _component.GetValue<object>("ButtonNo").GetValue<KMSelectable>("KMSelectable");
@@ -38,9 +38,7 @@ public class ColourFlashESShim : ComponentSolverShim
 		else
 		{
 			inputCommand = inputCommand.ToLowerInvariant().Replace("any", "cualq");
-			IEnumerator command = RespondToCommandUnshimmed(inputCommand);
-			while (command.MoveNext())
-				yield return command.Current;
+			yield return RespondToCommandUnshimmed(inputCommand);
 		}
 	}
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ModuleID("mysterymodule")]
 public class MysteryModuleShim : ReflectionComponentSolverShim
 {
 	public static readonly Dictionary<BombComponent, GameObject> CoveredModules = new Dictionary<BombComponent, GameObject>();
@@ -9,8 +10,6 @@ public class MysteryModuleShim : ReflectionComponentSolverShim
 	public MysteryModuleShim(TwitchModule module)
 		: base(module, "MysteryModuleScript")
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
-
 		module.StartCoroutine(WaitForMysteryModule());
 	}
 

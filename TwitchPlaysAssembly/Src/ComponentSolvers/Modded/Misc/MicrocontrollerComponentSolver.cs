@@ -3,6 +3,7 @@ using System.Collections;
 using System.Reflection;
 using UnityEngine;
 
+[ModuleID("Microcontroller")]
 public class MicrocontrollerComponentSolver : ComponentSolver
 {
 	public MicrocontrollerComponentSolver(TwitchModule module) :
@@ -11,7 +12,7 @@ public class MicrocontrollerComponentSolver : ComponentSolver
 		object component = module.BombComponent.GetComponent(ComponentType);
 		_buttonOK = (KMSelectable) ButtonOKField.GetValue(component);
 		_buttonUp = (KMSelectable) ButtonUpField.GetValue(component);
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Set the current pin color with !{0} set red. Cycle the current pin !{0} cycle. Valid colors: white, red, yellow, magenta, blue, green.");
+		SetHelpMessage("Set the current pin color with !{0} set red. Cycle the current pin !{0} cycle. Valid colors: white, red, yellow, magenta, blue, green.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

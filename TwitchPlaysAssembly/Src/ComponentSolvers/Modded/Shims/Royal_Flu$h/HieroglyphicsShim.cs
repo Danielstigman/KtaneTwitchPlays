@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 
+[ModuleID("hieroglyphics")]
 public class HieroglyphicsShim : ComponentSolverShim
 {
 	public HieroglyphicsShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 	}
 
 	protected override IEnumerator ForcedSolveIEnumeratorShimmed()
 	{
 		if (Unshimmed.ForcedSolveMethod == null) yield break;
 		var coroutine = (IEnumerator) Unshimmed.ForcedSolveMethod.Invoke(Unshimmed.CommandComponent, null);
-		while (coroutine.MoveNext())
-			yield return coroutine.Current;
+		yield return coroutine;
 		while (!Module.BombComponent.IsSolved)
 			yield return true;
 	}

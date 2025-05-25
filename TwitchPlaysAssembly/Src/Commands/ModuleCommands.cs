@@ -12,7 +12,7 @@ static class ModuleCommands
 	/// <syntax>help</syntax>
 	/// <summary>Sends a message to chat with information on what commands you can use to solve the module.</summary>
 	/// <restriction>SolvedAllowed</restriction>
-	[Command(@"(?:help|manual)( +pdf)?"), SolvedAllowed]
+	[Command(@"(?:help|manual)( pdf)?"), SolvedAllowed]
 	public static void Help(TwitchModule module, [Group(1)] bool pdf)
 	{
 		string manualType = pdf ? "pdf" : "html";
@@ -35,7 +35,7 @@ static class ModuleCommands
 	/// <name>Queue Flip</name>
 	/// <syntax>queue flip</syntax>
 	/// <summary>Queues the bomb to be flipped over when the module is solved.</summary>
-	[Command("(?:bomb|queue) +(?:turn(?: +a?round)?|flip|spin)")]
+	[Command("(?:bomb|queue) (?:turn(?: a?round)?|flip|spin)")]
 	public static void BombTurnAround(TwitchModule module)
 	{
 		if (!module.Solver.TurnQueued)
@@ -49,7 +49,7 @@ static class ModuleCommands
 	/// <name>Cancel Queued Flip</name>
 	/// <syntax>cancel queue flip</syntax>
 	/// <summary>Cancels a previously queued flip when the module was solved.</summary>
-	[Command("cancel +(?:bomb|queue) +(?:turn(?: +a?round)?|flip|spin)")]
+	[Command("cancel (?:bomb|queue) (?:turn(?: +a?round)?|flip|spin)")]
 	public static void BombTurnAroundCancel(TwitchModule module)
 	{
 		module.Solver.TurnQueued = false;
@@ -77,9 +77,7 @@ static class ModuleCommands
 	public static IEnumerator Show(TwitchModule module, object yield)
 	{
 		bool select = !module.BombComponent.GetModuleID().EqualsAny("lookLookAway");
-		IEnumerator focusCoroutine = module.Bomb.Focus(module.Selectable, module.FocusDistance, module.FrontFace, select);
-		while (focusCoroutine.MoveNext())
-			yield return focusCoroutine.Current;
+		yield return module.Bomb.Focus(module.Selectable, module.FocusDistance, module.FrontFace, select);
 
 		yield return new WaitForSeconds(0.5f);
 		yield return yield is float delay ? new WaitForSecondsWithCancel(delay, false, module.Solver) : yield;
@@ -88,9 +86,7 @@ static class ModuleCommands
 			module.StartCoroutine(module.Bomb.Defocus(module.Selectable, module.FrontFace, select));
 			yield break;
 		}
-		IEnumerator defocusCoroutine = module.Bomb.Defocus(module.Selectable, module.FrontFace, select);
-		while (defocusCoroutine.MoveNext())
-			yield return defocusCoroutine.Current;
+		yield return module.Bomb.Defocus(module.Selectable, module.FrontFace, select);
 
 		yield return new WaitForSeconds(0.5f);
 	}
@@ -119,7 +115,6 @@ static class ModuleCommands
 	/// <name>Claim View Pin</name>
 	/// <syntax>claim view pin\ncvp</syntax>
 	/// <summary>Claims, views and pins a module. You can remove one of three actions as well. (e.g. claim view)</summary>
-	[Command("solve")]
 	[Command(@"(claim view|view claim|claimview|viewclaim|cv|vc|claim view pin|view pin claim|claimviewpin|viewpinclaim|cvp|vpc)")]
 	public static void ClaimViewPin(TwitchModule module, string user, bool isWhisper, [Group(1)] string cmd) => ClaimViewOrPin(module, user, isWhisper, view: true, pin: cmd.Contains("p"));
 
@@ -169,7 +164,7 @@ static class ModuleCommands
 	/// <name>Assign</name>
 	/// <syntax>assign [username]</syntax>
 	/// <summary>Assigns a module to another user. Usually requires mod rank but if you are claiming the module you can attempt to assign it to another user.</summary>
-	[Command(@"assign +(.+)")]
+	[Command(@"assign (.+)")]
 	public static void Assign(TwitchModule module, string user, [Group(1)] string targetUser)
 	{
 		targetUser = targetUser.FormatUsername();
@@ -333,6 +328,39 @@ static class ModuleCommands
 	/// <restriction>Mod</restriction>
 	[Command(@"unmark", AccessLevel.Mod, AccessLevel.Mod)]
 	public static void Unmark(TwitchModule module) => module.SetBannerColor(module.Claimed ? module.ClaimedBackgroundColour : module.unclaimedBackgroundColor);
+
+	/// <name>Selectables</name>
+	/// <syntax>selectables</syntax>
+	/// <summary>List all selectable objects in a module</summary>
+	[Command(@"selectables")]
+	public static void Selectables(TwitchModule module)
+	{
+		Selectable[] modSels = module.Selectable.Children.Where(x => x != null).Distinct().ToArray();
+		string selectablesStr = modSels.Select((sel, idx) => $"{sel.name} ({idx + 1})").Join(", ");
+		IRCConnection.SendMessage($"Selectables for module {module.Code} ({module.BombComponent.GetModuleDisplayName()}): {selectablesStr}");
+	}
+
+	/// <name>Highlight</name>
+	/// <syntax>highlight [index]</syntax>
+	/// <summary>Highlights a specific selectable object in a module</summary>
+	[Command(@"highlight +(\d+)")]
+	public static IEnumerator Highlight(TwitchModule module, [Group(1)] int selectableIndex)
+	{
+		Selectable[] modSels = module.Selectable.Children.Where(x => x != null).Distinct().ToArray();
+		if (!selectableIndex.InRange(1, modSels.Length)) yield break;
+
+		yield return module.Bomb.Focus(module.Selectable, module.FocusDistance, module.FrontFace);
+
+		Selectable selectable = modSels[selectableIndex - 1];
+		selectable.SetHighlight(true);
+		yield return new WaitForSeconds(3);
+
+		// NOTE: The dehighlight and defocus must happen on the same frame.
+		selectable.SetHighlight(false);
+		module.Selectable.OnDefocus.Invoke();
+
+		yield return module.Bomb.Defocus(module.Selectable, module.FrontFace);
+	}
 
 	public static IEnumerator Zoom(TwitchModule module, SuperZoomData zoomData, object yield)
 	{
@@ -561,9 +589,7 @@ static class ModuleCommands
 			TwitchGame.Instance.Modules.Count(x => !x.Solved && GameRoom.Instance.IsCurrentBomb(x.BombID)) < TwitchPlaySettings.data.MinUnsolvedModulesLeftForClaims
 		)
 		{
-			var response = module.Solver.RespondToCommand(user, cmd);
-			while (response.MoveNext())
-				yield return response.Current;
+			yield return module.Solver.RespondToCommand(user, cmd);
 
 			module.Solver.EnableAnarchyStrike();
 		}

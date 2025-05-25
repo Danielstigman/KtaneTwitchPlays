@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 
+[ModuleID("NeedyBeer")]
 public class NeedyBeerComponentSolver : ComponentSolver
 {
 	public NeedyBeerComponentSolver(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Refill that beer with !{0} refill.");
+		SetHelpMessage("Refill that beer with !{0} refill.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

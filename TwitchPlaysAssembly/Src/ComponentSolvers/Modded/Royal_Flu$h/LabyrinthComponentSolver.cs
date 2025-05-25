@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("labyrinth")]
 public class LabyrinthComponentSolver : ComponentSolver
 {
 	public LabyrinthComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Move around the labyrinth using !{0} move <directions>. Directions must be abbreviated.");
+		SetHelpMessage("Move around the labyrinth using !{0} move <directions>. Directions must be abbreviated.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

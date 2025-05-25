@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
+[ModuleID("groceryStore")]
 public class GroceryStoreShim : ComponentSolverShim
 {
 	public GroceryStoreShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = new KMSelectable[] { (KMSelectable) AddButtonField.GetValue(_component), (KMSelectable) LeaveButtonField.GetValue(_component) };
 	}
@@ -28,8 +28,7 @@ public class GroceryStoreShim : ComponentSolverShim
 		}
 
 		IEnumerator command = RespondToCommandUnshimmed(inputCommand.ToLowerInvariant().Trim());
-		while (command.MoveNext())
-			yield return command.Current;
+		yield return command;
 	}
 
 	protected override IEnumerator ForcedSolveIEnumeratorShimmed()

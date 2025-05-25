@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+[ModuleID("ThirdBase")]
 public class ThirdBaseComponentSolver : ComponentSolver
 {
 	public ThirdBaseComponentSolver(TwitchModule module) :
@@ -13,7 +14,7 @@ public class ThirdBaseComponentSolver : ComponentSolver
 		object component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = (KMSelectable[]) ButtonsField.GetValue(component);
 		_phrase = (string[]) PhraseField.GetValue(component);
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Press a button with !{0} z0s8. Word must match the button as it would appear if the module was the right way up. Not case sensitive.");
+		SetHelpMessage("Press a button with !{0} z0s8. Word must match the button as it would appear if the module was the right way up. Not case sensitive.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

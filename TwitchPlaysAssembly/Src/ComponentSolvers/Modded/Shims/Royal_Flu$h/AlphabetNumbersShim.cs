@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Linq;
 
+[ModuleID("alphabetNumbers")]
 public class AlphabetNumbersShim : ComponentSolverShim
 {
 	public AlphabetNumbersShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 	}
 

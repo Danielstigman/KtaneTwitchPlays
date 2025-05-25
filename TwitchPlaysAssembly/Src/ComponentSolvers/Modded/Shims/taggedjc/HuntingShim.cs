@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("hunting")]
 public class HuntingShim : ComponentSolverShim
 {
 	public HuntingShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("buttons");
 	}

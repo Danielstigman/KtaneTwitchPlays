@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ModuleID("FlashMemory")]
 public class FlashMemoryShim : ComponentSolverShim
 {
 	public FlashMemoryShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("ModuleButtons");
 		_bolt = _component.GetValue<KMSelectable>("BoltButton");

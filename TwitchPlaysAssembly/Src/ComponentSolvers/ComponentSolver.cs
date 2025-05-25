@@ -13,6 +13,7 @@ public abstract class ComponentSolver
 	protected ComponentSolver(TwitchModule module, bool hookUpEvents = true)
 	{
 		Module = module;
+		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 
 		if (!hookUpEvents) return;
 		module.BombComponent.OnPass += OnPass;
@@ -108,15 +109,11 @@ public abstract class ComponentSolver
 
 			if (!TwitchPlaySettings.data.AnarchyMode)
 			{
-				IEnumerator focusDefocus = Module.Bomb.Focus(Module.Selectable, FocusDistance, FrontFace, select);
-				while (focusDefocus.MoveNext())
-					yield return focusDefocus.Current;
+				yield return Module.Bomb.Focus(Module.Selectable, FocusDistance, FrontFace, select);
 
 				yield return new WaitForSeconds(0.5f);
 
-				focusDefocus = Module.Bomb.Defocus(Module.Selectable, FrontFace, select);
-				while (focusDefocus.MoveNext())
-					yield return focusDefocus.Current;
+				yield return Module.Bomb.Defocus(Module.Selectable, FrontFace, select);
 
 				yield return new WaitForSeconds(0.5f);
 				_currentUserNickName = null;
@@ -137,10 +134,7 @@ public abstract class ComponentSolver
 
 		AppreciateArtComponentSolver.ShowAppreciation(Module);
 
-		IEnumerator focusCoroutine = Module.Bomb.Focus(Module.Selectable, FocusDistance, FrontFace, select);
-		while (focusCoroutine.MoveNext())
-			yield return focusCoroutine.Current;
-
+		yield return Module.Bomb.Focus(Module.Selectable, FocusDistance, FrontFace, select);
 		yield return new WaitForSeconds(0.5f);
 
 		bool parseError = false;
@@ -225,7 +219,7 @@ public abstract class ComponentSolver
 				{
 					if (chatResponse == SendToTwitchChatResponse.HandledMustHalt)
 						break; // Antitroll, requested stop with "sendtochat!h", etc.
-					// otherwise handled, continue
+							   // otherwise handled, continue
 				}
 				else if (currentString.StartsWith("add strike", StringComparison.InvariantCultureIgnoreCase))
 					OnStrike(null);
@@ -293,9 +287,7 @@ public abstract class ComponentSolver
 					{
 						TwitchGame.ModuleCameras?.Hide();
 						TwitchGame.ModuleCameras?.SetHudVisibility(false);
-						IEnumerator hideUI = Module.Bomb.HideMainUIWindow();
-						while (hideUI.MoveNext())
-							yield return hideUI.Current;
+						yield return Module.Bomb.HideMainUIWindow();
 					}
 
 					hideCamera = true;
@@ -455,9 +447,7 @@ public abstract class ComponentSolver
 		{
 			TwitchGame.ModuleCameras?.Show();
 			TwitchGame.ModuleCameras?.SetHudVisibility(true);
-			IEnumerator showUI = Module.Bomb.ShowMainUIWindow();
-			while (showUI.MoveNext())
-				yield return showUI.Current;
+			yield return Module.Bomb.ShowMainUIWindow();
 		}
 
 		if (_musicPlayer != null)
@@ -571,7 +561,7 @@ public abstract class ComponentSolver
 			return instantResponseReturn;
 		}
 
-		if (!message.RegexMatch(out match, @"^(sendtochat|sendtochaterror|strikemessage|antitroll) +(\S(?:\S|\s)*)$")) return SendToTwitchChatResponse.NotHandled;
+		if (!message.RegexMatch(out match, @"^(sendtochat|sendtochaterror|strikemessage|antitroll) (\S(?:\S|\s)*)$")) return SendToTwitchChatResponse.NotHandled;
 
 		string chatMsg = skipFormatting ? match.Groups[2].Value : string.Format(match.Groups[2].Value, userNickName, Module.Code);
 
@@ -636,9 +626,7 @@ public abstract class ComponentSolver
 		}
 		else
 		{
-			var enumerator = RespondToCommandInternal(command);
-			while (enumerator.MoveNext())
-				yield return enumerator.Current;
+			yield return RespondToCommandInternal(command);
 		}
 	}
 
@@ -653,7 +641,7 @@ public abstract class ComponentSolver
 
 	protected static void DoInteractionHighlight(MonoBehaviour interactable) => interactable.GetComponent<Selectable>().SetHighlight(true);
 
-	protected string GetModuleType() => Module.BombComponent.GetComponent<KMBombModule>()?.ModuleType ?? Module.BombComponent.GetComponent<KMNeedyModule>()?.ModuleType;
+	protected string GetModuleType() => Module.BombComponent.GetModuleID();
 
 	// ReSharper disable once UnusedMember.Global
 	protected WaitForSeconds DoInteractionClick(MonoBehaviour interactable, float delay) => DoInteractionClick(interactable, null, delay);
@@ -747,6 +735,11 @@ public abstract class ComponentSolver
 		IRCConnection.SendMessage(reason);
 		SolveSilently();
 	}
+
+	protected void SetHelpMessage(string helpMessage)
+	{
+		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), helpMessage);
+	}
 	#endregion
 
 	#region Private Methods
@@ -813,9 +806,7 @@ public abstract class ComponentSolver
 			yield return new WaitForSeconds(0.1f);
 
 		_readyToTurn = false;
-		IEnumerator turnCoroutine = Module.Bomb.TurnBomb();
-		while (turnCoroutine.MoveNext())
-			yield return turnCoroutine.Current;
+		yield return Module.Bomb.TurnBomb();
 
 		yield return new WaitForSeconds(0.5f);
 	}
@@ -1432,7 +1423,7 @@ public abstract class ComponentSolver
 	private int _pointsToAward;
 
 	private MusicPlayer _musicPlayer;
-	public ModuleInformation ModInfo = null;
+	public ModuleInformation ModInfo;
 	public bool ChainableCommands = false;
 
 	public bool TurnQueued;

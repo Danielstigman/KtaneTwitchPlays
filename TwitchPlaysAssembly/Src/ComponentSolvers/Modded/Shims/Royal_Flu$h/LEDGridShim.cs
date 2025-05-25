@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("ledGrid")]
 public class LEDGridShim : ComponentSolverShim
 {
 	public LEDGridShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_btns = new KMSelectable[] { _component.GetValue<KMSelectable>("aButton"), _component.GetValue<KMSelectable>("bButton"), _component.GetValue<KMSelectable>("cButton"), _component.GetValue<KMSelectable>("dButton") };
 	}

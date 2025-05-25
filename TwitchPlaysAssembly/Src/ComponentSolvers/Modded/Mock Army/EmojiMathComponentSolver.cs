@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
+[ModuleID("Emoji Math")]
 public class EmojiMathComponentSolver : ComponentSolver
 {
 	public EmojiMathComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		_buttons = (KMSelectable[]) _buttonsField.GetValue(module.BombComponent.GetComponent(_componentType));
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Submit an answer using !{0} submit -47.");
+		SetHelpMessage("Submit an answer using !{0} submit -47.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

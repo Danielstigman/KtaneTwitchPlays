@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+[ModuleID("JuckAlchemy")]
 public class AlchemyComponentSolver : ComponentSolver
 {
 	public AlchemyComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Press buttons using !{0} press <buttons>. Runes are specified directionally. Frequencies are specified by full name. Other buttons: redraw, submit and clear.");
+		SetHelpMessage("Press buttons using !{0} press <buttons>. Runes are specified directionally. Frequencies are specified by full name. Other buttons: redraw, submit and clear.");
 	}
 
 	readonly Dictionary<string, int> buttonMap = new Dictionary<string, int>()

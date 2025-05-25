@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("quintuples")]
 public class QuintuplesShim : ComponentSolverShim
 {
 	public QuintuplesShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_upBtns = _component.GetValue<KMSelectable[]>("upCycleButtons");
 		_downBtns = _component.GetValue<KMSelectable[]>("downCycleButtons");

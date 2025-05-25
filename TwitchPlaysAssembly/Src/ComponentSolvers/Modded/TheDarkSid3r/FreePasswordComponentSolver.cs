@@ -2,13 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("FreePassword")]
+[ModuleID("LargeFreePassword")]
 public class FreePasswordComponentSolver : ComponentSolver
 {
 	public FreePasswordComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		_modType = GetModuleType();
-		ModInfo = ComponentSolverFactory.GetModuleInfo(_modType, _modType == "FreePassword" ? "!{0} submit [Presses the submit button] | !{0} WAHOO [Sets the display to \"WAHOO\"]" : "!{0} submit [Presses the submit button] | !{0} THEREEGGSONBOMBWAHOO [Sets the display to \"THEREEGGSONBOMBWAHOO\"]");
+		SetHelpMessage(_modType == "FreePassword" ? "!{0} submit [Presses the submit button] | !{0} WAHOO [Sets the display to \"WAHOO\"]" : "!{0} submit [Presses the submit button] | !{0} THEREEGGSONBOMBWAHOO [Sets the display to \"THEREEGGSONBOMBWAHOO\"]");
 		_buttons.AddRange(module.BombComponent.GetComponent<KMSelectable>().Children);
 	}
 

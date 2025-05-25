@@ -3,12 +3,12 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("TableMadness")]
 public class TableMadnessShim : ReflectionComponentSolverShim
 {
 	public TableMadnessShim(TwitchModule module)
 		: base(module, "TableMadness", "TableMadness")
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_buttons = _component.GetValue<KMSelectable[]>("buttons");
 	}
 

@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Text.RegularExpressions;
 
+[ModuleID("MorseWar")]
 public class MorseWarComponentSolver : ComponentSolver
 {
 	public MorseWarComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Send supply ship (S) or a submarine (U) using: !{0} press SUSU.");
+		SetHelpMessage("Send supply ship (S) or a submarine (U) using: !{0} press SUSU.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

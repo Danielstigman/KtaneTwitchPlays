@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("heraldry")]
 public class HeraldryShim : ComponentSolverShim
 {
 	public HeraldryShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_pageTurn = _component.GetValue<KMSelectable[]>("pageTurners");
 		_crests = _component.GetValue<KMSelectable[]>("crestSelectors");

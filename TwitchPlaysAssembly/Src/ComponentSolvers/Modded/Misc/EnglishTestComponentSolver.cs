@@ -3,6 +3,7 @@ using System.Collections;
 using System.Reflection;
 using UnityEngine;
 
+[ModuleID("EnglishTest")]
 public class EnglishTestComponentSolver : ComponentSolver
 {
 	public EnglishTestComponentSolver(TwitchModule module) :
@@ -11,7 +12,7 @@ public class EnglishTestComponentSolver : ComponentSolver
 		_englishTestComponent = module.BombComponent.GetComponent(ComponentType);
 		_selectButton = FindChildGameObjectByName(module.BombComponent.gameObject, "Left Button").GetComponent<KMSelectable>();
 		_submitButton = FindChildGameObjectByName(module.BombComponent.gameObject, "Submit Button").GetComponent<KMSelectable>();
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Answer the displayed question with !{0} submit 2 or !{0} answer 2. (Answers are numbered from 1-4 starting from left to right.)");
+		SetHelpMessage("Answer the displayed question with !{0} submit 2 or !{0} answer 2. (Answers are numbered from 1-4 starting from left to right.)");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("identityParade")]
 public class IdentityParadeShim : ComponentSolverShim
 {
 	public IdentityParadeShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_submit = _component.GetValue<KMSelectable>("convictBut");
 	}

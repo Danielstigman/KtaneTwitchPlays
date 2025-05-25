@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("Color Decoding")]
 public class ColorDecodingShim : ReflectionComponentSolverShim
 {
 	public ColorDecodingShim(TwitchModule module)
 		: base(module, "ColorDecoding", "ColorDecoding")
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_buttons = _component.GetValue<KMSelectable[]>("InputButtons");
 	}
 

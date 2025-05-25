@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+[ModuleID("SpellingBuzzed")]
 public class SpellingBuzzedComponentSolver : ReflectionComponentSolver
 {
 	public SpellingBuzzedComponentSolver(TwitchModule module) :
@@ -19,7 +20,7 @@ public class SpellingBuzzedComponentSolver : ReflectionComponentSolver
 	public override IEnumerator Respond(string[] split, string command)
 	{
 		command = command.ToUpperInvariant();
-		if(command.EqualsAny("RESET"))
+		if (command.EqualsAny("RESET"))
 		{
 			yield return null;
 			yield return Click(8, 0);

@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+[ModuleID("cube")]
 public class CubeShim : ComponentSolverShim
 {
 	public CubeShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_numberButtons = _component.GetValue<KMSelectable[]>("numberButtons");
 		_executeButton = _component.GetValue<KMSelectable>("executeButton");

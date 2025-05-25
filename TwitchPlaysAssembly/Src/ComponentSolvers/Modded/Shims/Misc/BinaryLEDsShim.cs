@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+[ModuleID("BinaryLeds")]
 public class BinaryLEDsShim : ComponentSolverShim
 {
 	public BinaryLEDsShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 	}
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("lgndEightPages")]
 public class EightPagesShim : ComponentSolverShim
 {
 	public EightPagesShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_page = _component.GetValue<KMSelectable>("Button");
 	}

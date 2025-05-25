@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("hangover")]
 public class HangoverComponentSolver : ComponentSolver
 {
 	public HangoverComponentSolver(TwitchModule module) :
@@ -15,7 +16,7 @@ public class HangoverComponentSolver : ComponentSolver
 		ingredientOptions = _component.GetValue<string[]>("ingredientOptions").ToList();
 		ingredientText = _component.GetValue<TextMesh>("ingredientText");
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Toggle the note using !{0} note. Submit the elixir using !{0} submit. Add an ingredient or action using !{0} add <items>. An item name can be partial but must it be unique. Separate multiple items using semicolons.");
+		SetHelpMessage("Toggle the note using !{0} note. Submit the elixir using !{0} submit. Add an ingredient or action using !{0} add <items>. An item name can be partial but must it be unique. Separate multiple items using semicolons.");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("moon")]
 public class MoonShim : ComponentSolverShim
 {
 	public MoonShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 	}
 

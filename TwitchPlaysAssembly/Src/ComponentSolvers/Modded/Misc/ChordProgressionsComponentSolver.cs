@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+[ModuleID("chordProgressions")]
 public class ChordProgressionsComponentSolver : ComponentSolver
 {
 	public ChordProgressionsComponentSolver(TwitchModule module) :
@@ -11,7 +12,7 @@ public class ChordProgressionsComponentSolver : ComponentSolver
 	{
 		component = Module.BombComponent.GetComponent(componentType);
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "!{0} submit <note> <type> [submit a chord] | b and # can be used for flat and sharp. | Types: major, minor and diminished");
+		SetHelpMessage("!{0} submit <note> <type> [submit a chord] | b and # can be used for flat and sharp. | Types: major, minor and diminished");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

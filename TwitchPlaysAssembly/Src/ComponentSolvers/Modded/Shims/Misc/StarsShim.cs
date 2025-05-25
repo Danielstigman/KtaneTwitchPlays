@@ -3,12 +3,12 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+[ModuleID("stars")]
 public class StarsShim : ComponentSolverShim
 {
 	public StarsShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_starBtns = _component.GetValue<KMSelectable[]>("StarFormation");
 		_otherBtns = _component.GetValue<KMSelectable[]>("ComplementaryButtons");

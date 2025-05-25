@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ModuleID("NonogramModule")]
 public class NonogramShim : ComponentSolverShim
 {
 	public NonogramShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_buttons = _component.GetValue<KMSelectable[]>("gridButtons");
 		_dot = _component.GetValue<KMSelectable>("dotButton");

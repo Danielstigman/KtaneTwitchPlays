@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Linq;
 
+[ModuleID("skinnyWires")]
 public class SkinnyWiresComponentSolver : ComponentSolver
 {
 	public SkinnyWiresComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "!{0} cut <letter><number> [cut the wire going from <letter> to <number>]");
+		SetHelpMessage("!{0} cut <letter><number> [cut the wire going from <letter> to <number>]");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

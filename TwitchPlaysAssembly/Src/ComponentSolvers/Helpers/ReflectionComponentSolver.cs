@@ -24,7 +24,7 @@ public abstract class ReflectionComponentSolver : ComponentSolver
 		if (_component == null) _component = module.BombComponent.GetComponentInChildren(componentType);
 
 		selectable = Module.Selectable;
-		if (helpMessage != null) ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), helpMessage);
+		if (helpMessage != null) SetHelpMessage(helpMessage);
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)
@@ -33,8 +33,8 @@ public abstract class ReflectionComponentSolver : ComponentSolver
 		string[] split = inputCommand.SplitFull(" ,;");
 
 		var enumerator = Respond(split, inputCommand);
-		while (enumerator.MoveNext())
-			yield return enumerator.Current;
+		if (enumerator == null) yield break;
+		yield return enumerator;
 	}
 
 	public abstract IEnumerator Respond(string[] split, string command);

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("Numbers")]
 public class NumbersShim : ComponentSolverShim
 {
 	public NumbersShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_up = _component.GetValue<KMSelectable>("buttonUp");
 		_down = _component.GetValue<KMSelectable>("buttonDown");

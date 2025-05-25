@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ModuleID("CrypticPassword")]
 public class CrypticPasswordComponentSolver : ComponentSolver
 {
 	public CrypticPasswordComponentSolver(TwitchModule module) :
@@ -9,7 +10,7 @@ public class CrypticPasswordComponentSolver : ComponentSolver
 	{
 		component = Module.BombComponent.GetComponent(componentType);
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "!{0} submit answer [submit an answer] | !{0} toggle [move all columns down one character]");
+		SetHelpMessage("!{0} submit answer [submit an answer] | !{0} toggle [move all columns down one character]");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

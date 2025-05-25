@@ -1,12 +1,13 @@
 using System.Collections;
 
+[ModuleID("troll")]
 public class TheTrollComponentSolver : ComponentSolver
 {
 	public TheTrollComponentSolver(TwitchModule module) :
 		base(module)
 	{
 		trollButton = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "Press the button x times: !{0} press x; Press the button when the last digit of the timer is x: !{0} press at x");
+		SetHelpMessage("Press the button x times: !{0} press x; Press the button when the last digit of the timer is x: !{0} press at x");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

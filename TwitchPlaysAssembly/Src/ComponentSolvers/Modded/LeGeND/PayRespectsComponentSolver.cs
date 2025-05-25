@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("lgndPayRespects")]
 public class PayRespectsComponentSolver : ReflectionComponentSolver
 {
 	public PayRespectsComponentSolver(TwitchModule module) :
@@ -19,7 +20,7 @@ public class PayRespectsComponentSolver : ReflectionComponentSolver
 		}
 
 		yield return null;
-		while ((int)Math.Ceiling(needyComponent.TimeRemaining) != 30)
+		while ((int) Math.Ceiling(needyComponent.TimeRemaining) != 30)
 			yield return Click(0);
 	}
 
@@ -29,14 +30,14 @@ public class PayRespectsComponentSolver : ReflectionComponentSolver
 
 		while (true)
 		{
-			if (needyComponent.State != NeedyComponent.NeedyStateEnum.Running || (int)Math.Ceiling(needyComponent.TimeRemaining) == 30)
+			if (needyComponent.State != NeedyComponent.NeedyStateEnum.Running || (int) Math.Ceiling(needyComponent.TimeRemaining) == 30)
 			{
 				yield return true;
 				continue;
 			}
 
 			yield return null;
-			while ((int)Math.Ceiling(needyComponent.TimeRemaining) != 30)
+			while ((int) Math.Ceiling(needyComponent.TimeRemaining) != 30)
 				yield return Click(0);
 		}
 	}

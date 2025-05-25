@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 
+[ModuleID("modulusManipulation")]
 public class ModulusManipulationComponentSolver : ComponentSolver
 {
 	public ModulusManipulationComponentSolver(TwitchModule module) :
@@ -8,7 +9,7 @@ public class ModulusManipulationComponentSolver : ComponentSolver
 	{
 		_component = module.BombComponent.GetComponent(ComponentType);
 		selectables = Module.BombComponent.GetComponent<KMSelectable>().Children;
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType(), "!{0} 123 4 [submits 123 when there is 4 minutes left on the clock]");
+		SetHelpMessage("!{0} 123 4 [submits 123 when there is 4 minutes left on the clock]");
 	}
 
 	protected internal override IEnumerator RespondToCommandInternal(string inputCommand)

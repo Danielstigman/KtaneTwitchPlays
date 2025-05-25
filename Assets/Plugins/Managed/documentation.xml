@@ -145,7 +145,7 @@
         <member name="T:CommandAttribute">
             <summary>Marks a method as a command understood by the Twitch Plays system.</summary>
         </member>
-        <member name="P:CommandAttribute.Regex">
+        <member name="F:CommandAttribute.Regex">
             <summary>
                 A regular expression that matches all forms of the command. Note that which part of the command is matched against
                 this regex depends on what type of command it is (global, module, bomb, or holdable).</summary>
@@ -1191,6 +1191,16 @@
             <syntax>unmark</syntax>
             <summary>Returns the color of a module's ID back to default.</summary>
             <restriction>Mod</restriction>
+        </member>
+        <member name="M:ModuleCommands.Selectables(TwitchModule)">
+            <name>Selectables</name>
+            <syntax>selectables</syntax>
+            <summary>List all selectable objects in a module</summary>
+        </member>
+        <member name="M:ModuleCommands.Highlight(TwitchModule,System.Int32)">
+            <name>Highlight</name>
+            <syntax>highlight [index]</syntax>
+            <summary>Highlights a specific selectable object in a module</summary>
         </member>
         <member name="M:ModuleCommands.DefaultCommand(TwitchModule,System.String,System.String)">
             <name>Zoom, Superzoom, Show and Tilt</name>

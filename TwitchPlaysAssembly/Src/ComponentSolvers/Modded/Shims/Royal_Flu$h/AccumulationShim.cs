@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+[ModuleID("accumulation")]
 public class AccumulationShim : ComponentSolverShim
 {
 	public AccumulationShim(TwitchModule module)
 		: base(module)
 	{
-		ModInfo = ComponentSolverFactory.GetModuleInfo(GetModuleType());
 		_component = module.BombComponent.GetComponent(ComponentType);
 		_keypadButtons = _component.GetValue<KMSelectable[]>("keypad");
 		_clearButton = _component.GetValue<KMSelectable>("clearButton");
