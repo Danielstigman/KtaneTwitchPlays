@@ -443,6 +443,8 @@ public class TwitchPlaysService : MonoBehaviour
 		}
 	}
 
+	private void InvokeCommand(IRCMessage msg, string cmdStr, params Type[] commandTypes) => InvokeCommand(msg, cmdStr, (object) null, commandTypes);
+
 	private void InvokeCommand<TObj>(IRCMessage msg, string cmdStr, TObj extraObject = default, params Type[] commandTypes)
 	{
 		var enumerator = CommandParser.Invoke(msg, cmdStr, extraObject, commandTypes);
